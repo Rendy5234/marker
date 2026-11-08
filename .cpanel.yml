@@ -1,0 +1,14 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/urn/public_html/marker
+    
+    # Salin folder-folder
+    - /bin/cp -R assets $DEPLOYPATH
+    - /bin/cp -R css $DEPLOYPATH
+    - /bin/cp -R data $DEPLOYPATH
+    - /bin/cp -R js $DEPLOYPATH
+    
+    # Salin file utama
+    - /bin/cp index.html $DEPLOYPATH
+    - /bin/cp hitter.php $DEPLOYPATH
