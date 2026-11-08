@@ -827,7 +827,7 @@ function applyCenterMonitor(mon, tokoh, img, aksen, alert) {
   return true;
 }
 
-function applySideMonitor(mon, tokoh, side, aksen, alert, duration, phase) {
+function applySideMonitor(mon, tokoh, side, aksen, alert, speedPxPerSec, phase) {
   const s = mon._side;
   if (s.applied) return true;
   const bgMesh = s.bgPlane.getObject3D('mesh');
@@ -871,6 +871,10 @@ function applySideMonitor(mon, tokoh, side, aksen, alert, duration, phase) {
   // Loop seamless: offset harus bergerak tepat SATU salinan konten.
   // canvasHeight = 2 × contentH, sehingga satu salinan = contentH / canvasHeight = 0.5.
   const maxOffset = contentH / s.contentCanvas.height;
+
+  // Hitung durasi secara dinamis berdasarkan kecepatan (pixel per detik)
+  const duration = contentH / speedPxPerSec;
+
   s.contentPlane.setAttribute('canvas-scroller',
     `duration: ${duration}; phase: ${phase}; invert: true`);
   const comp = s.contentPlane.components['canvas-scroller'];
@@ -1058,8 +1062,12 @@ function buildMarker(tokoh) {
     if (!imgSettled) return false;
 
     if (!applyCenterMonitor(centerMon, tokoh, img, aksen, alert)) return false;
-    if (!applySideMonitor(leftMon, tokoh, 'left', aksen, alert, 10, 0)) return false;
-    if (!applySideMonitor(rightMon, tokoh, 'right', aksen, alert, 12, 0.5)) return false;
+    
+    // Gunakan kecepatan scroll yang sama (pixel per detik) untuk kedua monitor
+    // sehingga kecepatan baca seragam meski panjang konten berbeda
+    const scrollSpeed = 40; // 40 pixel per detik
+    if (!applySideMonitor(leftMon, tokoh, 'left', aksen, alert, scrollSpeed, 0)) return false;
+    if (!applySideMonitor(rightMon, tokoh, 'right', aksen, alert, scrollSpeed, 0.5)) return false;
 
     if (statusPlane.getObject3D('mesh')) {
       applyPlaneTexture(statusPlane, statusCanvas);
