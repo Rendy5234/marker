@@ -1,0 +1,30 @@
+{
+  "tokoh": [
+    {
+      "id": "hitler",
+      "markerType": "pattern",
+      "markerValue": "assets/patterns/hitler.patt",
+      "nama": "ADOLF HITLER",
+      "gelar": "Kanselir Jerman / Führer",
+      "negara": "JERMAN",
+      "periode": "1933–1945",
+      "konteks": "Holocaust, PD II, Nazi - Diktator Jerman yang memulai Perang Dunia II",
+      "ideologi": "Nazisme / Fasisme",
+      "dampak": "Perang Dunia II\nEstimasi 6 juta korban Holocaust\nJerman hancur total",
+      "pelajaran": "Bahaya ideologi ekstrem tanpa kontrol\nPentingnya demokrasi dan HAM",
+      "gambar": "assets/hitler.png",
+      "warnaAksen": "#00e5ff",
+      "warnaAlert": "#ff2a4d",
+      "kode": "TH-001",
+      "tags": ["DIKTATOR", "HOLOCAUST", "PD II", "NAZI"],
+      "timeline": [
+        { "tahun": "1933", "peristiwa": "Jadi Kanselir Jerman" },
+        { "tahun": "1934", "peristiwa": "Menjadi Führer" },
+        { "tahun": "1939", "peristiwa": "Memulai PD II" },
+        { "tahun": "1941", "peristiwa": "Operasi Barbarossa" },
+        { "tahun": "1942", "peristiwa": "Konferans Wannsee" },
+        { "tahun": "1945", "peristiwa": "Bunuh diri di Berlin" }
+      ]
+    }
+  ]
+}
