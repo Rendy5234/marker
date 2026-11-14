@@ -25,6 +25,131 @@
         { "tahun": "1942", "peristiwa": "Konferans Wannsee" },
         { "tahun": "1945", "peristiwa": "Bunuh diri di Berlin" }
       ]
+    },
+    {
+      "id": "stalin",
+      "markerType": "pattern",
+      "markerValue": "assets/patterns/pattern-stalin.patt",
+      "nama": "JOSEPH STALIN",
+      "gelar": "Sekretaris Jenderal Partai Komunis Uni Soviet",
+      "negara": "UNI SOVIET",
+      "periode": "1924–1953",
+      "konteks": "Gulag, Pembersihan Besar, Holodomor",
+      "ideologi": "Komunisme / Marxisme-Leninisme (Stalinisme)",
+      "dampak": "Pembersihan Besar 1936–1938\nJutaan tahanan di kamp Gulag\nKolektivisasi memicu kelaparan Holodomor",
+      "pelajaran": "Kekuasaan absolut melahirkan teror negara\nKritik dan oposisi harus dilindungi",
+      "gambar": "assets/stalin.png",
+      "warnaAksen": "#00e5ff",
+      "warnaAlert": "#ff2a4d",
+      "kode": "TH-002",
+      "tags": ["DIKTATOR", "GULAG", "KOMUNIS", "PD II"],
+      "timeline": [
+        { "tahun": "1924", "peristiwa": "Memimpin setelah Lenin wafat" },
+        { "tahun": "1928", "peristiwa": "Kolektivisasi pertanian" },
+        { "tahun": "1936", "peristiwa": "Pembersihan Besar" },
+        { "tahun": "1939", "peristiwa": "Pakta Nazi-Soviet" },
+        { "tahun": "1945", "peristiwa": "Menang atas Nazi Jerman" },
+        { "tahun": "1953", "peristiwa": "Wafat" }
+      ]
+    },
+    {
+      "id": "mao",
+      "markerType": "pattern",
+      "markerValue": "assets/patterns/pattern-mao.patt",
+      "nama": "MAO ZEDONG",
+      "gelar": "Pendiri dan Ketua Partai Komunis Tiongkok",
+      "negara": "TIONGKOK",
+      "periode": "1949–1976",
+      "konteks": "Revolusi Kebudayaan, Lompatan Jauh ke Depan",
+      "ideologi": "Komunisme Maois",
+      "dampak": "Lompatan Jauh ke Depan (1958–1962) memicu kelaparan massal\nRevolusi Kebudayaan (1966–1976) menghancurkan budaya & pendidikan\nPuluhan juta korban",
+      "pelajaran": "Kultus individu merusak nalar kolektif\nKebijakan tanpa data berujung bencana",
+      "gambar": "assets/mao.png",
+      "warnaAksen": "#00e5ff",
+      "warnaAlert": "#ff2a4d",
+      "kode": "TH-003",
+      "tags": ["DIKTATOR", "MAOIS", "TIONGKOK", "KULTUS"],
+      "timeline": [
+        { "tahun": "1949", "peristiwa": "Mendirikan RRT" },
+        { "tahun": "1958", "peristiwa": "Lompatan Jauh ke Depan" },
+        { "tahun": "1966", "peristiwa": "Revolusi Kebudayaan" },
+        { "tahun": "1976", "peristiwa": "Wafat" }
+      ]
+    },
+    {
+      "id": "polpot",
+      "markerType": "pattern",
+      "markerValue": "assets/patterns/pattern-polpot.patt",
+      "nama": "POL POT",
+      "gelar": "Pemimpin Khmer Merah / Kampuchea Demokratik",
+      "negara": "KAMBOJA",
+      "periode": "1975–1979",
+      "konteks": "Genosida Khmer Merah, Killing Fields",
+      "ideologi": "Komunisme ekstrem / Maoisme radikal",
+      "dampak": "Genosida 1975–1979\nSekitar 1,5–2 juta jiwa tewas (±25% populasi)\nKota, uang, sekolah, dan agama dihapus",
+      "pelajaran": "Utopia radikal menghancurkan kemanusiaan\nIntelektual dan minoritas rentan jadi korban",
+      "gambar": "assets/polpot.png",
+      "warnaAksen": "#00e5ff",
+      "warnaAlert": "#ff2a4d",
+      "kode": "TH-004",
+      "tags": ["GENOSIDA", "KHMER MERAH", "KAMBOJA", "EKSTREM"],
+      "timeline": [
+        { "tahun": "1975", "peristiwa": "Merebut Phnom Penh" },
+        { "tahun": "1976", "peristiwa": "Proklamasi Kampuchea Demokratik" },
+        { "tahun": "1977", "peristiwa": "Serangan ke Vietnam" },
+        { "tahun": "1979", "peristiwa": "Rezim jatuh oleh Vietnam" },
+        { "tahun": "1998", "peristiwa": "Wafat" }
+      ]
+    },
+    {
+      "id": "mussolini",
+      "markerType": "pattern",
+      "markerValue": "assets/patterns/pattern-mussolini.patt",
+      "nama": "BENITO MUSSOLINI",
+      "gelar": "Il Duce, Perdana Menteri Italia",
+      "negara": "ITALIA",
+      "periode": "1922–1943",
+      "konteks": "Fasisme Italia, sekutu Nazi dalam PD II",
+      "ideologi": "Fasisme",
+      "dampak": "Negara fasis pertama (1922)\nIkut PD II bersama Nazi Jerman\nItalia porak-poranda",
+      "pelajaran": "Fasisme tumbuh dari krisis dan ketakutan\nPers bebas adalah benteng melawan tirani",
+      "gambar": "assets/mussolini.png",
+      "warnaAksen": "#00e5ff",
+      "warnaAlert": "#ff2a4d",
+      "kode": "TH-005",
+      "tags": ["FASIS", "IL DUCE", "ITALIA", "PD II"],
+      "timeline": [
+        { "tahun": "1919", "peristiwa": "Mendirikan Fasci di Combattimento" },
+        { "tahun": "1922", "peristiwa": "Pawai ke Roma" },
+        { "tahun": "1939", "peristiwa": "Aliansi dengan Nazi" },
+        { "tahun": "1943", "peristiwa": "Digulingkan" },
+        { "tahun": "1945", "peristiwa": "Dieksekusi" }
+      ]
+    },
+    {
+      "id": "kimilsung",
+      "markerType": "pattern",
+      "markerValue": "assets/patterns/pattern-kimilsung.patt",
+      "nama": "KIM IL-SUNG",
+      "gelar": "Pemimpin Agung / Pendiri Korea Utara",
+      "negara": "KOREA UTARA",
+      "periode": "1948–1994",
+      "konteks": "Perang Korea, negara totaliter dinasti",
+      "ideologi": "Juche (kemandirian) / Stalinisme",
+      "dampak": "Perang Korea 1950–1953\nNegara totaliter tertutup\nFondasi dinasti Kim dan kultus individu",
+      "pelajaran": "Isolasi menutup kebenaran dan informasi\nKultus pemimpin menindas kebebasan rakyat",
+      "gambar": "assets/kimilsung.png",
+      "warnaAksen": "#00e5ff",
+      "warnaAlert": "#ff2a4d",
+      "kode": "TH-006",
+      "tags": ["DIKTATOR", "JUCHE", "KOREA UTARA", "TOTALITER"],
+      "timeline": [
+        { "tahun": "1948", "peristiwa": "Mendirikan DPRK" },
+        { "tahun": "1950", "peristiwa": "Invasi ke Korea Selatan" },
+        { "tahun": "1953", "peristiwa": "Gencatan senjata" },
+        { "tahun": "1972", "peristiwa": "Menjadi Presiden" },
+        { "tahun": "1994", "peristiwa": "Wafat" }
+      ]
     }
   ]
 }
