@@ -15,15 +15,17 @@
 
   <div id="hint">▸ SCAN MARKER TO INITIALIZE</div>
 
-<div id="info-panel">
-  <h2 id="info-nama"></h2>
-  <p id="info-meta"></p>
-</div>
+  <div id="info-panel">
+    <h2 id="info-nama"></h2>
+    <p id="info-meta"></p>
+  </div>
 
   <!-- Scene AR -->
-  <a-scene embedded
-    arjs="sourceType: webcam; debugUIEnabled: false; sourceWidth: 640; sourceHeight: 480; detectionMode: mono; maxDetectionRate: 60; smoothPosition: false; smoothRotation: false;"
-    vr-mode-ui="enabled: false"
+  <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false; 
+          sourceWidth: 1280; sourceHeight: 720; 
+          detectionMode: mono; maxDetectionRate: 30; 
+          patternRatio: 0.70; 
+          smoothPosition: true; smoothRotation: true;" vr-mode-ui="enabled: false"
     renderer="colorManagement: false; antialias: true; precision: medium; powerPreference: high-performance;"
     loading-screen="enabled: false">
 
