@@ -2,13 +2,7 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/urn/public_html/marker
-    
-    # Salin folder-folder
-    - /bin/cp -R assets $DEPLOYPATH
-    - /bin/cp -R css $DEPLOYPATH
-    - /bin/cp -R data $DEPLOYPATH
-    - /bin/cp -R js $DEPLOYPATH
-    
-    # Salin file utama
-    - /bin/cp index.html $DEPLOYPATH
-    - /bin/cp hitter.php $DEPLOYPATH
+
+    # Mirror bersih: hosting identik dengan repo, file yang dihapus di repo ikut terhapus.
+    # cgi-bin dan .well-known dikecualikan agar folder default hosting tetap utuh.
+    - rsync -a --delete --exclude '.git' --exclude '.cpanel.yml' --exclude '.gitignore' --exclude '.clinerules' --exclude '.kilo' --exclude 'cgi-bin' --exclude '.well-known' ./ $DEPLOYPATH/
