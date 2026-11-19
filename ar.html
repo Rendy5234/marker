@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#000000">
+  <meta name="description" content="Kamera AR: pindai penanda tokoh untuk membuka command center hologram.">
+  <title>Kamera AR — AR Sejarah Tokoh Dunia</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+</head>
+
+<body class="ar-page">
+
+  <a class="ar-back" href="index.html" aria-label="Kembali ke dashboard">
+    <span aria-hidden="true">&larr;</span> Kembali
+  </a>
+
+  <div id="hint">Arahkan kamera ke penanda</div>
+
+  <div id="camera-status" role="status" hidden></div>
+
+  <div id="info-panel">
+    <h2 id="info-nama"></h2>
+    <p id="info-meta"></p>
+    <p><span class="label">IDEOLOGI</span><span id="info-ideologi"></span></p>
+    <p><span class="label">DAMPAK</span><span id="info-dampak"></span></p>
+    <p><span class="label">PELAJARAN</span><span id="info-pelajaran"></span></p>
+  </div>
+
+  <!-- Scene AR -->
+  <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false; 
+          sourceWidth: 1280; sourceHeight: 720; 
+          detectionMode: mono; maxDetectionRate: 30; 
+          patternRatio: 0.70; 
+          smoothPosition: true; smoothRotation: true;" vr-mode-ui="enabled: false"
+    renderer="colorManagement: false; antialias: true; precision: medium; powerPreference: high-performance;"
+    loading-screen="enabled: false">
+
+    <a-entity camera></a-entity>
+  </a-scene>
+
+  <script src="app.js"></script>
+  <script src="js/ar.js"></script>
+</body>
+
+</html>

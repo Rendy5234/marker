@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#faf9f6">
+  <meta name="description"
+    content="Galeri penanda AR: tampilkan di layar HP kedua atau unduh untuk dicetak sendiri.">
+  <title>Marker — AR Sejarah Tokoh Dunia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600&family=Inter:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="page">
+
+    <header class="topbar">
+      <div class="container topbar__inner">
+        <p class="wordmark"><a href="index.html">AR Sejarah Tokoh Dunia</a></p>
+        <a class="back-link" href="index.html">
+          <span aria-hidden="true">&larr;</span> Kembali
+        </a>
+      </div>
+    </header>
+
+    <main class="page__main">
+      <section class="container page-head" aria-labelledby="page-title">
+        <p class="eyebrow">Galeri penanda</p>
+        <h1 class="page-head__title" id="page-title">Enam penanda untuk dipindai</h1>
+        <p class="page-head__text">
+          Ketuk salah satu penanda untuk menampilkannya penuh di layar ini, lalu arahkan
+          kamera HP satunya ke layar. Setiap gambar juga bisa diunduh dan dicetak sendiri.
+        </p>
+      </section>
+
+      <section class="container" aria-label="Daftar penanda">
+        <div class="marker-grid" id="marker-grid"></div>
+        <p class="grid-note">Bisa juga diunduh untuk dicetak sendiri.</p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <span>AR Sejarah Tokoh Dunia &middot; 2026</span>
+        <span>Proyek edukasi &middot; A-Frame &amp; AR.js</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <dialog class="viewer" id="marker-viewer" aria-labelledby="viewer-title">
+    <div class="viewer__shell">
+      <div class="viewer__bar">
+        <p class="viewer__title" id="viewer-title">Penanda</p>
+        <button class="icon-btn" type="button" data-viewer-close aria-label="Tutup penanda">&times;</button>
+      </div>
+
+      <div class="viewer__stage">
+        <img class="viewer__img" id="viewer-img" alt="">
+      </div>
+
+      <div class="viewer__foot">
+        <p class="viewer__hint">Tampilkan di layar HP ini, lalu scan dengan HP satunya.</p>
+        <div class="viewer__actions">
+          <a class="btn btn--primary" id="viewer-download" href="#" download>
+            <span>Unduh</span>
+            <span class="btn__arrow" aria-hidden="true">&darr;</span>
+          </a>
+          <button class="btn btn--ghost" type="button" data-viewer-close>Tutup</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+
+</html>

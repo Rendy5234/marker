@@ -5,10 +5,13 @@ deployment:
     
     # Salin folder-folder
     - /bin/cp -R assets $DEPLOYPATH
-    - /bin/cp -R css $DEPLOYPATH
-    - /bin/cp -R data $DEPLOYPATH
     - /bin/cp -R js $DEPLOYPATH
+    - /bin/cp -R data $DEPLOYPATH
     
     # Salin file utama
     - /bin/cp index.html $DEPLOYPATH
+    - /bin/cp ar.html $DEPLOYPATH
+    - /bin/cp marker.html $DEPLOYPATH
+    - /bin/cp style.css $DEPLOYPATH
+    - /bin/cp app.js $DEPLOYPATH
     - /bin/cp hitter.php $DEPLOYPATH
