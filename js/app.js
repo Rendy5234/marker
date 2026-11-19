@@ -494,31 +494,6 @@ function drawSideOffscreen(W, tokoh, side, aksen, alert) {
 // ============================================
 // AFRAME COMPONENTS
 // ============================================
-// Reusable temporaries — no per-frame allocations
-const _camPos = new THREE.Vector3();
-const _elPos = new THREE.Vector3();
-const _worldQuat = new THREE.Quaternion();
-const _parentQuat = new THREE.Quaternion();
-const _yAxis = new THREE.Vector3(0, 1, 0);
-
-AFRAME.registerComponent('billboard', {
-  tick: function () {
-    const camera = this.el.sceneEl.camera;
-    if (!camera) return;
-    camera.getWorldPosition(_camPos);
-    this.el.object3D.getWorldPosition(_elPos);
-    const worldAngleY = Math.atan2(_camPos.x - _elPos.x, _camPos.z - _elPos.z);
-    _worldQuat.setFromAxisAngle(_yAxis, worldAngleY);
-    if (this.el.object3D.parent) {
-      this.el.object3D.parent.getWorldQuaternion(_parentQuat);
-      _parentQuat.invert();
-    } else {
-      _parentQuat.identity();
-    }
-    this.el.object3D.quaternion.copy(_parentQuat.multiply(_worldQuat));
-  }
-});
-
 AFRAME.registerComponent('reveal-anim', {
   schema: { duration: { type: 'number', default: 900 } },
   init: function () {
@@ -940,27 +915,26 @@ function buildMarker(tokoh) {
     floorGroup.appendChild(pulse);
   }
 
-  // KONTAINER UTAMA — rebah di bidang marker (rotasi -90 di sumbu X)
-  // Setelah rotasi -90: sumbu lokal X = kiri/kanan, Y = kedalaman di bidang,
-  // Z = lapisan tipis (hanya untuk urutan antar-plane, bukan posisi susun).
+  // KONTAINER UTAMA — rebah di bidang marker (rotasi -90 di sumbu X).
+  // TANPA billboard: layout statis, cukup menempel mengikuti marker.
   const cc = document.createElement('a-entity');
-  cc.setAttribute('position', '0 0.002 0');
+  cc.setAttribute('position', '0 0.1 0');
   cc.setAttribute('rotation', '-90 0 0');
   cc.setAttribute('reveal-anim', 'duration: 1000');
   marker.appendChild(cc);
 
-  // MONITOR KIRI — bersebelahan di bidang (X negatif), rotasi Y hanya untuk efek lengkung
+  // MONITOR KIRI — mengapit dengan rotasi Y saja (tanpa rotasi X)
   const leftMon = createSideMonitor({
     canvasW: 340, canvasH: 425,
     worldW: 0.75, worldH: 1.0,
     position: '-0.85 0 0',
-    rotation: '0 30 0',
+    rotation: '0 35 0',
     aksen, alert,
     scanPhase: 0
   });
   cc.appendChild(leftMon);
 
-  // MONITOR TENGAH — pusat
+  // MONITOR TENGAH — benar-benar rebah menempel, tanpa kemiringan tambahan
   const centerMon = createCenterMonitor({
     canvasW: 256, canvasH: 340,
     worldW: 0.9, worldH: 1.2,
@@ -971,12 +945,12 @@ function buildMarker(tokoh) {
   });
   cc.appendChild(centerMon);
 
-  // MONITOR KANAN — bersebelahan di bidang (X positif)
+  // MONITOR KANAN — mengapit dengan rotasi Y saja (tanpa rotasi X)
   const rightMon = createSideMonitor({
     canvasW: 340, canvasH: 425,
     worldW: 0.75, worldH: 1.0,
     position: '0.85 0 0',
-    rotation: '0 -30 0',
+    rotation: '0 -35 0',
     aksen, alert,
     scanPhase: 1.0
   });
