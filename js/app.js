@@ -859,6 +859,7 @@ function applySideMonitor(mon, tokoh, side, aksen, alert, speedPxPerSec, phase) 
   return true;
 }
 
+
 // ============================================
 // BUILD MARKER
 // ============================================
