@@ -1,7 +1,14 @@
+---
 deployment:
   tasks:
     - export DEPLOYPATH=/home/urn/public_html/marker
-    - export REPOPATH=/home/urn/repositories/nama-repo-kamu # Ganti dengan path repo di cPanel
     
-    # Sinkronkan seluruh isi repositori ke folder deploy, hapus file yang tidak ada di repo
-    - /bin/rsync -aP --exclude='.git' --exclude='.cpanel.yml' --exclude='.well-known' --exclude='cgi-bin' ${REPOPATH}/ ${DEPLOYPATH} --delete-after
+    # Salin folder-folder
+    - /bin/cp -R assets $DEPLOYPATH
+    - /bin/cp -R css $DEPLOYPATH
+    - /bin/cp -R data $DEPLOYPATH
+    - /bin/cp -R js $DEPLOYPATH
+    
+    # Salin file utama
+    - /bin/cp index.html $DEPLOYPATH
+    - /bin/cp hitter.php $DEPLOYPATH
