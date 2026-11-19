@@ -523,15 +523,15 @@ AFRAME.registerComponent('reveal-anim', {
   schema: { duration: { type: 'number', default: 900 } },
   init: function () {
     this.startTime = null;
-    this.el.object3D.scale.set(0.01, 0.01, 0.01);
+    this.el.object3D.scale.set(0.15, 0.15, 0.15);
   },
   tick: function (time) {
     if (this.startTime === null) this.startTime = time;
     const p = Math.min((time - this.startTime) / this.data.duration, 1);
-    const c4 = (2 * Math.PI) / 3;
-    const ease = p === 0 ? 0 : p === 1 ? 1 :
-      Math.pow(2, -10 * p) * Math.sin((p * 10 - 0.75) * c4) + 1;
-    this.el.object3D.scale.set(ease, ease, ease);
+    // Ease-out (tanpa spring) agar tidak mengayun pada kontainer yang sudah dirotasi
+    const ease = 1 - Math.pow(1 - p, 3);
+    const s = 0.15 + ease * 0.85;
+    this.el.object3D.scale.set(s, s, s);
     if (p >= 1) this.el.removeAttribute('reveal-anim');
   }
 });
@@ -913,9 +913,9 @@ function buildMarker(tokoh) {
   const alert = tokoh.warnaAlert || '#ff2a4d';
   const kode = tokoh.kode || 'XX-000';
 
-  // FLOOR GRID
+  // FLOOR GRID — sedikit di bawah kontainer agar tidak z-fight dengan monitor
   const floorGroup = document.createElement('a-entity');
-  floorGroup.setAttribute('position', '0 0.01 0');
+  floorGroup.setAttribute('position', '0 0.001 0');
   floorGroup.setAttribute('rotation', '-90 0 0');
   marker.appendChild(floorGroup);
 
@@ -940,25 +940,27 @@ function buildMarker(tokoh) {
     floorGroup.appendChild(pulse);
   }
 
-  // KONTAINER UTAMA - tiduran datar di atas marker
+  // KONTAINER UTAMA — rebah di bidang marker (rotasi -90 di sumbu X)
+  // Setelah rotasi -90: sumbu lokal X = kiri/kanan, Y = kedalaman di bidang,
+  // Z = lapisan tipis (hanya untuk urutan antar-plane, bukan posisi susun).
   const cc = document.createElement('a-entity');
-  cc.setAttribute('position', '0 0.1 0');
+  cc.setAttribute('position', '0 0.002 0');
   cc.setAttribute('rotation', '-90 0 0');
   cc.setAttribute('reveal-anim', 'duration: 1000');
   marker.appendChild(cc);
 
-  // MONITOR KIRI - jarak sedang
+  // MONITOR KIRI — bersebelahan di bidang (X negatif), rotasi Y hanya untuk efek lengkung
   const leftMon = createSideMonitor({
     canvasW: 340, canvasH: 425,
     worldW: 0.75, worldH: 1.0,
-    position: '-0.9 0 0.15',
-    rotation: '0 35 0',
+    position: '-0.85 0 0',
+    rotation: '0 30 0',
     aksen, alert,
     scanPhase: 0
   });
   cc.appendChild(leftMon);
 
-  // MONITOR TENGAH - tetap di pusat, billboard akan membuatnya selalu menghadap
+  // MONITOR TENGAH — pusat
   const centerMon = createCenterMonitor({
     canvasW: 256, canvasH: 340,
     worldW: 0.9, worldH: 1.2,
@@ -969,27 +971,27 @@ function buildMarker(tokoh) {
   });
   cc.appendChild(centerMon);
 
-  // MONITOR KANAN - jarak sedang
+  // MONITOR KANAN — bersebelahan di bidang (X positif)
   const rightMon = createSideMonitor({
     canvasW: 340, canvasH: 425,
     worldW: 0.75, worldH: 1.0,
-    position: '0.9 0 0.15',
-    rotation: '0 -35 0',
+    position: '0.85 0 0',
+    rotation: '0 -30 0',
     aksen, alert,
     scanPhase: 1.0
   });
   cc.appendChild(rightMon);
 
-  // CONNECTION LINES
-  [-0.55, 0.55].forEach(x => {
+  // CONNECTION LINES — di bidang, tepat di bawah susunan monitor
+  [-0.5, 0.5].forEach(x => {
     const line = makePlane(0.1, 0.006, aksen, 0.5, 0.001);
-    line.setAttribute('position', `${x} -1.05 0.001`);
+    line.setAttribute('position', `${x} -0.62 0.001`);
     cc.appendChild(line);
   });
 
-  // STATUS BAR BAWAH
+  // STATUS BAR BAWAH — di bidang (bukan ketinggian)
   const statusBar = makePlane(2.5, 0.055, aksen, 0.12, 0.001);
-  statusBar.setAttribute('position', `0 -1.22 0.001`);
+  statusBar.setAttribute('position', `0 -0.75 0.001`);
   cc.appendChild(statusBar);
 
   const statusCanvas = document.createElement('canvas');
@@ -1011,39 +1013,36 @@ function buildMarker(tokoh) {
   const statusPlane = document.createElement('a-plane');
   statusPlane.setAttribute('width', '2.5');
   statusPlane.setAttribute('height', '0.07');
-  statusPlane.setAttribute('position', '0 -1.22 0.002');
+  statusPlane.setAttribute('position', '0 -0.75 0.002');
   statusPlane.setAttribute('material', 'shader: flat; transparent: true;');
   cc.appendChild(statusPlane);
 
-  // DATA PARTICLES
+  // DATA PARTICLES — mengambang di bidang, di sisi luar susunan monitor
   for (let i = 0; i < 14; i++) {
     const p = makePlane(0.05, 0.008, aksen, 0.7, 0);
     const side = Math.random() > 0.5 ? 1 : -1;
-    const x = side * (1.7 + Math.random() * 0.5);
-    const z = (Math.random() - 0.5) * 0.3;
-    const baseY = (Math.random() - 0.5) * 0.6;
+    const x = side * (1.4 + Math.random() * 0.4);
+    const z = 0.002 + Math.random() * 0.004;
+    const baseY = (Math.random() - 0.5) * 0.8;
     p.setAttribute('position', `${x} ${baseY} ${z}`);
-    p.setAttribute('particle-float', `yMin: -0.6; yMax: 0.6; speed: ${0.15 + Math.random() * 0.25}; offset: ${Math.random() * Math.PI * 2}`);
+    p.setAttribute('particle-float', `yMin: -0.5; yMax: 0.5; speed: ${0.15 + Math.random() * 0.25}; offset: ${Math.random() * Math.PI * 2}`);
     cc.appendChild(p);
   }
 
-  // LED STATUS
+  // LED STATUS — di bidang
   const led = document.createElement('a-circle');
-  led.setAttribute('position', `-1.2 0.72 0.01`);
+  led.setAttribute('position', `-1.15 0.62 0.01`);
   led.setAttribute('radius', '0.018');
   led.setAttribute('color', alert);
   led.setAttribute('material', `shader: flat; color: ${alert}; opacity: 0.9;`);
   led.setAttribute('blink', 'speed: 1.5');
   cc.appendChild(led);
 
-  // GLOW CONE
-  const glow = document.createElement('a-cone');
-  glow.setAttribute('position', '0 -1.15 0');
-  glow.setAttribute('radius-bottom', '0.4');
-  glow.setAttribute('radius-top', '1.4');
-  glow.setAttribute('height', '0.5');
-  glow.setAttribute('open-ended', 'true');
-  glow.setAttribute('side', 'double');
+  // GLOW — ring datar di bidang (pengganti cone tegak yang tidak cocok saat rebah)
+  const glow = document.createElement('a-ring');
+  glow.setAttribute('position', '0 0 0.0005');
+  glow.setAttribute('radius-inner', '0.95');
+  glow.setAttribute('radius-outer', '1.05');
   glow.setAttribute('material',
     `shader: flat; color: ${aksen}; opacity: 0.08; side: double; transparent: true;`);
   cc.appendChild(glow);
